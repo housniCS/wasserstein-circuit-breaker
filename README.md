@@ -87,7 +87,7 @@ Running the end-to-end pipeline (`python run_all_stages.py`) generates the 3-pan
 
 ## 4. Quantitative Analysis: Why the Filtered PnL is Lower under 10 bps
 
-A naive glance at the backtest shows that the filtered strategy ended at $-27.61\%$ compared to $-24.83\%$ for the raw strategy. In quantitative research, understanding and articulating **why** this happens is crucial. This outcome is a textbook illustration of **market microstructure frictions vs. statistical alpha**.
+The backtest shows that the filtered strategy ended at $-27.61\%$ compared to $-24.83\%$ for the raw strategy. This difference is directly explained by transaction costs and turnover frequency:
 
 ### A. The Risk Classifier Performed With High Accuracy
 The surrogate tree's objective is to detect regimes where the primary model's predictions fail. Looking at the conditional error rates:
