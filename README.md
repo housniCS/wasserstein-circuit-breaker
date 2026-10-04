@@ -257,6 +257,29 @@ python run_all_stages.py --stage 2
 
 ---
 
-## 9. License
+## 9. Key Competencies & Engineering Skills Demonstrated
+
+This project serves as an end-to-end demonstration of applied quantitative research, market microstructure awareness, and production-grade software engineering:
+
+### A. Mathematical & Quantitative Finance
+- **Optimal Transport in Finance**: Implementing rolling 1D Wasserstein distance ($W_1$) to quantify empirical distribution drift without making restrictive Gaussian assumptions.
+- **Intraday Volatility Modeling**: Computing the Garman-Klass extreme-value estimator to capture high/low price dynamics rather than noisy close-to-close returns.
+- **Market Microstructure & Friction Analysis**: Modeling realistic transaction costs (10 bps retail taker fees vs. institutional maker rebates), analyzing portfolio turnover drag, and diagnosing whipsaw/chatter phenomena.
+- **Risk & Performance Analytics**: Engineering vectorized performance evaluation measuring annualized CAGR, Sharpe ratio, Sortino ratio, Calmar ratio, and underwater drawdowns.
+
+### B. Machine Learning & Model Risk Management (MRM)
+- **Time-Series Foundation Models**: Integrating zero-shot directional forecasting via Amazon Chronos-Bolt (`amazon/chronos-bolt-tiny`) over rolling context horizons.
+- **Surrogate Modeling & Explainable AI (XAI)**: Training regularized CART decision trees directly on binary prediction residuals ($e_t \in \{0, 1\}$) to extract transparent, human-auditable risk rules.
+- **Out-of-Distribution (OOD) Protection**: Translating machine learning failure zones into deterministic risk filters (switching to 100% Cash during regime shifts).
+
+### C. Quantitative Software Engineering & Architecture
+- **Vectorized Backtesting Engine**: Constructing an $\mathcal{O}(N)$ backtest in NumPy/Pandas with rigorous temporal alignment (`shift(1)`) to guarantee zero lookahead bias.
+- **Modular Production Design**: Structuring clean separation of concerns (`data_loader`, `metrics`, `primary_model`, `circuit_breaker`, `backtest`) with typed interfaces and unit test stages.
+- **Robust Data Pipeline**: Building a resilient Binance REST API client with local disk caching and multi-regime synthetic data fallbacks.
+- **Interactive Data Visualization**: Creating a client-side analytics web dashboard (`index.html`) featuring interactive 2D decision boundary scatter plots and real-time stress testing.
+
+---
+
+## 10. License
 
 This project is licensed under the [MIT License](LICENSE).
