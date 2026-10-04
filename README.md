@@ -185,7 +185,6 @@ wasserstein-circuit-breaker/
 │   ├── circuit_breaker.py              # CART surrogate tree & deterministic cash filter
 │   └── backtest.py                     # Vectorized net-of-fees backtest engine
 │
-├── index.html                          # Interactive client-side analytics & stress-testing dashboard
 ├── results.png                         # 3-panel performance & drift visualization
 ├── run_all_stages.py                   # Master runner (Stages 1, 2, 3 + visual plot)
 ├── run_pipeline.py                     # Configurable CLI execution pipeline
@@ -198,26 +197,7 @@ wasserstein-circuit-breaker/
 
 ---
 
-## 7. Interactive Visual Dashboard (`index.html`)
-
-This repository includes a client-side analytics dashboard in [`index.html`](index.html).
-
-Key features:
-- **Interactive 2D Feature Space**: Real-time scatter plot of $[W_1, \sigma_{\text{GK}}]$ colored by model error $e_t$ and tree partition boundaries.
-- **Tree Inspector**: Visual hierarchy of the surrogate decision tree with sample counts, Gini purity, and leaf error probabilities.
-- **Interactive Stress-Testing Slider**: Dynamically adjust the critical threshold $\tau$ to see instantaneous impact on Cash allocation, equity curve, and drawdown.
-
-Simply open `index.html` in any web browser:
-```bash
-# Windows
-start index.html
-# Linux / macOS
-xdg-open index.html || open index.html
-```
-
----
-
-## 8. Quickstart & Installation
+## 7. Quickstart & Installation
 
 ### Step 1: Clone the repository
 ```bash
@@ -257,7 +237,7 @@ python run_all_stages.py --stage 2
 
 ---
 
-## 9. Key Competencies & Engineering Skills Demonstrated
+## 8. Key Competencies & Engineering Skills Demonstrated
 
 This project serves as an end-to-end demonstration of applied quantitative research, market microstructure awareness, and production-grade software engineering:
 
@@ -276,10 +256,11 @@ This project serves as an end-to-end demonstration of applied quantitative resea
 - **Vectorized Backtesting Engine**: Constructing an $\mathcal{O}(N)$ backtest in NumPy/Pandas with rigorous temporal alignment (`shift(1)`) to guarantee zero lookahead bias.
 - **Modular Production Design**: Structuring clean separation of concerns (`data_loader`, `metrics`, `primary_model`, `circuit_breaker`, `backtest`) with typed interfaces and unit test stages.
 - **Robust Data Pipeline**: Building a resilient Binance REST API client with local disk caching and multi-regime synthetic data fallbacks.
-- **Interactive Data Visualization**: Creating a client-side analytics web dashboard (`index.html`) featuring interactive 2D decision boundary scatter plots and real-time stress testing.
+- **Multi-Panel Financial Data Visualization**: Generating institutional-grade 3-panel performance visualizations (`results.png`) synchronizing equity curves, cash trigger bands, and Wasserstein drift time series.
 
 ---
 
-## 10. License
+## 9. License
 
 This project is licensed under the [MIT License](LICENSE).
+
