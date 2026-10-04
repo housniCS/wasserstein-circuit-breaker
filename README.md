@@ -17,9 +17,11 @@ Applying deep learning sequential architectures or time-series foundation models
 - When distribution drift occurs, the signal-to-noise ratio collapses, causing directional models to generate **catastrophic false signals** precisely when capital preservation is paramount.
 
 Rather than fine-tuning an overfitted predictor, this project implements an **interpretable model risk management layer**:
-1. **Quantify statistical divergence in real time** between immediate market dynamics and baseline reference regimes using the **1D Wasserstein metric ($W_1$)**.
-2. **Train an interpretable surrogate tree (CART)** directly on binary prediction residuals ($e_t = \mathbb{I}(\hat{y}_t \ne y_{t+1})$) conditioned on $[W_1, \sigma_{\text{GK}}]$.
-3. **Trigger an automated circuit-breaker ($S_t = 0$)** switching exposure to **100% Cash** when entering an invalidation regime, insulating the portfolio against toxic out-of-distribution shocks.
+1. **Quantify statistical divergence in real time** between immediate market dynamics and baseline reference regimes using the rolling 1D Wasserstein metric $W_1$.
+2. **Train an interpretable surrogate tree (CART)** directly on binary prediction failure residuals:
+   $$e_t = \mathbf{1}_{\{\hat{y}_t \ne y_{t+1}\}} \in \{0, 1\}$$
+   conditioned on the joint regime feature vector $\mathbf{x}_t = [W_1, \, \sigma_{\text{GK}}]$.
+3. **Trigger an automated circuit-breaker** ($S_t = 0$) switching exposure to **100% Cash** when entering an invalidation regime, insulating the portfolio against toxic out-of-distribution shocks.
 
 ---
 
@@ -133,7 +135,7 @@ $$\sigma_{GK, t}^2 = \frac{1}{2} \left[ \ln\left(\frac{H_t}{L_t}\right) \right]^
 ### C. Binary Error Residual Target
 The primary predictor produces direction $\hat{y}_t \in \{-1, +1\}$. Rather than modeling raw prices, the risk layer targets the directional misclassification indicator:
 
-$$e_t = \mathbb{I}\left(\hat{y}_t \ne \text{sign}(r_{t+1})\right) \in \{0, 1\}$$
+$$e_t = \mathbf{1}_{\{\hat{y}_t \ne \text{sign}(r_{t+1})\}} \in \{0, 1\}$$
 
 ### D. Interpretable Surrogate Decision Tree (CART)
 We fit a regularized shallow decision tree ($d=2$):
