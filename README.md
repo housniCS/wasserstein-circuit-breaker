@@ -223,16 +223,6 @@ python run_all_stages.py --stage 2
 
 ---
 
-## 8. Quantitative Pitch & Talking Points
-
-### Research & Academic Context:
-> *"To address model degradation in non-stationary time series, I engineered an out-of-distribution detection protocol that quantifies distribution drift in real time via the 1D Wasserstein metric between rolling return windows. An interpretable surrogate tree trained on the predictor's misclassification residuals partitions the metric space $(W_1, \sigma_{\text{GK}})$, establishing a deterministic inference-rejection rule with near-zero compute overhead."*
-
-### Hedge Fund & Systematic Trading Context:
-> *"Machine learning alpha strategies bleed capital during regime changes when distribution drift causes false signals. By coupling rolling Wasserstein divergence and Garman-Klass volatility into a CART surrogate tree, this system detects when the market enters toxic prediction regimes and forces 100% Cash allocation. Net of 10 bps transaction costs, this circuit breaker eliminates severe tail risk while preserving upside."*
-
----
-
-## 9. License
+## 8. License
 
 This project is licensed under the [MIT License](LICENSE).
