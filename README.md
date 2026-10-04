@@ -17,11 +17,9 @@ Applying deep learning sequential architectures or time-series foundation models
 - When distribution drift occurs, the signal-to-noise ratio collapses, causing directional models to generate **catastrophic false signals** precisely when capital preservation is paramount.
 
 Rather than fine-tuning an overfitted predictor, this project implements an **interpretable model risk management layer**:
-1. **Quantify statistical divergence in real time** between immediate market dynamics and baseline reference regimes using the rolling 1D Wasserstein metric $W_1$.
-2. **Train an interpretable surrogate tree (CART)** directly on binary prediction failure residuals:
-   $$e_t = \mathbf{1}_{\{\hat{y}_t \ne y_{t+1}\}} \in \{0, 1\}$$
-   conditioned on the joint regime feature vector $\mathbf{x}_t = [W_1, \, \sigma_{\text{GK}}]$.
-3. **Trigger an automated circuit-breaker** ($S_t = 0$) switching exposure to **100% Cash** when entering an invalidation regime, insulating the portfolio against toxic out-of-distribution shocks.
+1. **Quantify statistical divergence in real time**: Measure distribution shifts between recent hourly returns and historical baselines using the rolling 1D Wasserstein distance.
+2. **Train an interpretable surrogate tree (CART)**: Learn directly from directional forecasting mistakes by mapping binary prediction errors (win vs. loss) against market drift and intraday volatility.
+3. **Trigger an automated circuit-breaker**: Automatically switch the portfolio to 100% Cash whenever market conditions enter an identified failure regime, preserving capital during toxic shocks.
 
 ---
 
