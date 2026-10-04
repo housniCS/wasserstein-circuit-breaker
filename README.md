@@ -170,13 +170,6 @@ wasserstein-circuit-breaker/
 │   ├── btc_1h.csv                      # Binance BTC/USDT 1h OHLCV
 │   └── chronos_preds.csv               # Zero-shot Amazon Chronos-Bolt directional inferences
 │
-├── docs/                               # Comprehensive mathematical & quantitative guides
-│   ├── EXPLICATION_GLOBALE_PROJET.md   # Complete project breakdown & methodology
-│   ├── EXPLICATION_BACKTEST.md         # Vectorized backtest & friction mechanics
-│   ├── EXPLICATION_TARGET_RESIDUALS.md # Formulation of binary failure targets
-│   ├── RESIDU_ERREUR_BINAIRE.md        # Mathematical derivations of error residuals
-│   └── SUITE_DU_PROJET.md              # Research roadmap & prospective enhancements
-│
 ├── src/                                # Core Python package
 │   ├── __init__.py                     # Package export declarations
 │   ├── data_loader.py                  # Binance REST API client + synthetic regime fallback
