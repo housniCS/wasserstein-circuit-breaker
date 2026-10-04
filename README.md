@@ -110,12 +110,6 @@ In Panel 2 of [`results.png`](results.png), the cash regimes ($S_t = 0$, pink ba
 - **Institutional Reality**: Quantitative funds and proprietary desks do not trade hourly directional signals using retail taker orders. They operate under institutional VIP fee tiers with **Maker limit orders / peg orders**, paying **$0.00\%$ to $-0.005\%$** (receiving liquidity maker rebates).
 - **Impact**: Under maker execution ($0$ to $1$ bps), transaction costs fall by $90\%$ to $100\%$, and the $+6.7\%$ directional edge ($56.46\%$ hit rate) translates directly into solid positive net alpha.
 
-### D. Production Engineering Roadmap (V2 Mitigation)
-To eliminate the whipsaw penalty under higher friction assumptions:
-1. **Hysteresis & Cooldown Lock (Anti-Chatter)**: Enforcing a minimum holding period in cash (e.g. $K = 6$ to $12$ consecutive hours once triggered) to prevent hourly toggling, reducing turnover by $> 65\%$.
-2. **Conviction Deadband**: Requiring predicted directional confidence $|\hat{y}_t|$ to exceed round-trip friction costs ($2 \times \text{bps} = 0.20\%$) before re-entering a trade.
-3. **Multi-Timeframe Aggregation**: Deploying the circuit breaker on 4-hour or daily bars where the average candle return ($+2\%$ to $+5\%$) dwarfs the 10 bps friction.
-
 ---
 
 ## 5. Mathematical Foundations

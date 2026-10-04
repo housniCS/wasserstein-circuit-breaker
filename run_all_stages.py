@@ -56,17 +56,17 @@ def plot_results(
     # 1. COURBES D'ÉQUITÉ (PnL Cumulé Normalisé à 1.0)
     ax1 = axes[0]
     ax1.plot(timestamps, equity_df["equity_bnh"], label="Benchmark Buy & Hold BTC", color=c_bnh, linestyle="--", linewidth=1.8, alpha=0.85)
-    ax1.plot(timestamps, equity_df["equity_raw"], label="Stratégie Brute (Sans Filtre)", color=c_raw, linewidth=2.0)
-    ax1.plot(timestamps, equity_df["equity_filtered"], label="Stratégie Filtrée (+ Wasserstein CB)", color=c_filt, linewidth=2.5)
-    ax1.set_title("Performance Comparative Nette de Frais (10 bps) : Protection par Coupe-Circuit de Wasserstein", fontsize=14, fontweight="bold", pad=12)
-    ax1.set_ylabel("Capital Cumulé (Base 1.0)", fontsize=11, fontweight="bold")
+    ax1.plot(timestamps, equity_df["equity_raw"], label="Raw Strategy (Unfiltered)", color=c_raw, linewidth=2.0)
+    ax1.plot(timestamps, equity_df["equity_filtered"], label="Filtered Strategy (+ Wasserstein CB)", color=c_filt, linewidth=2.5)
+    ax1.set_title("Net Performance Comparison (10 bps Frictions): Wasserstein Circuit-Breaker Protection", fontsize=14, fontweight="bold", pad=12)
+    ax1.set_ylabel("Cumulative Equity (Base 1.0)", fontsize=11, fontweight="bold")
     ax1.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.9)
     ax1.grid(True, linestyle=":", alpha=0.6)
 
     # 2. COURS BTC & ZONES EN CASH (S_t = 0)
     ax2 = axes[1]
     close_price = df_eval.loc[timestamps, "close"]
-    ax2.plot(timestamps, close_price, label="Prix BTC/USDT (1h)", color=c_price, linewidth=1.6)
+    ax2.plot(timestamps, close_price, label="BTC/USDT Price (1h)", color=c_price, linewidth=1.6)
 
     is_cash = equity_df["circuit_breaker"] == 0
     cash_blocks = []
@@ -81,23 +81,23 @@ def plot_results(
         cash_blocks.append((start_idx, timestamps[-1]))
 
     for i, (start, end) in enumerate(cash_blocks):
-        lbl = "Coupe-Circuit Activé (100% Cash)" if i == 0 else ""
+        lbl = "Circuit-Breaker Triggered (100% Cash)" if i == 0 else ""
         ax2.axvspan(start, end, color=c_cash, alpha=0.22, label=lbl)
 
-    ax2.set_title("Dynamique du Coupe-Circuit Symbolique sur le Cours du BTC", fontsize=13, fontweight="bold", pad=10)
-    ax2.set_ylabel("Prix (USDT)", fontsize=11, fontweight="bold")
+    ax2.set_title("Symbolic Circuit-Breaker Dynamics & BTC/USDT Price Action", fontsize=13, fontweight="bold", pad=10)
+    ax2.set_ylabel("Price (USDT)", fontsize=11, fontweight="bold")
     ax2.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.9)
     ax2.grid(True, linestyle=":", alpha=0.6)
 
     # 3. DIVERGENCE DE WASSERSTEIN W_1
     ax3 = axes[2]
     w1_series = df_eval.loc[timestamps, "w1"]
-    ax3.plot(timestamps, w1_series, label="Divergence 1D de Wasserstein W_1(200h, 30h)", color=c_w1, linewidth=1.5)
+    ax3.plot(timestamps, w1_series, label="1D Wasserstein Divergence W_1(200h, 30h)", color=c_w1, linewidth=1.5)
     w1_high_regime = w1_series.quantile(0.85)
-    ax3.axhline(w1_high_regime, color="#c0392b", linestyle="--", linewidth=1.5, label=f"Seuil Régime Instable (p85 = {w1_high_regime:.4f})")
-    ax3.set_title("Évolution Temporelle de la Divergence Statistique de Wasserstein (Distribution Shift)", fontsize=13, fontweight="bold", pad=10)
-    ax3.set_ylabel("Distance W_1", fontsize=11, fontweight="bold")
-    ax3.set_xlabel("Date & Heure (UTC)", fontsize=11, fontweight="bold")
+    ax3.axhline(w1_high_regime, color="#c0392b", linestyle="--", linewidth=1.5, label=f"High-Drift Regime Threshold (p85 = {w1_high_regime:.4f})")
+    ax3.set_title("Rolling 1D Wasserstein Divergence Time Series (Distribution Shift)", fontsize=13, fontweight="bold", pad=10)
+    ax3.set_ylabel("Wasserstein Distance W_1", fontsize=11, fontweight="bold")
+    ax3.set_xlabel("Date & Time (UTC)", fontsize=11, fontweight="bold")
     ax3.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.9)
     ax3.grid(True, linestyle=":", alpha=0.6)
 
